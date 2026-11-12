@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Genera diagramas ASCII de tu estructura de carpetas. Hecho con HTML, CSS y JavaScript vanilla sobre Terminal CSS."
+    />
+    <meta
+      name="theme-color"
+      content="#ffffff"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#222225"
+      media="(prefers-color-scheme: dark)"
+    />
+    <title>indentree · diagramas de carpetas</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23222225'/%3E%3Ctext x='5' y='24' font-family='Menlo,monospace' font-size='20' font-weight='bold' fill='%2362c4ff'%3E%3E_%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="css/terminal.min.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body class="terminal">
+    <div class="app">
+      <header class="app-header">
+        <div class="brand">
+          <h1 class="logo terminal-prompt">indentree</h1>
+          <p class="tagline">diagramas ASCII de estructura de carpetas</p>
+        </div>
+
+        <div class="toolbar" role="group" aria-label="Acciones">
+          <button type="button" id="copy-button" class="btn btn-ghost btn-small">
+            <span id="copy-label">Copiar</span>
+          </button>
+          <button
+            type="button"
+            id="download-button"
+            class="btn btn-primary btn-small"
+          >
+            <span id="download-label">Descargar PNG</span>
+          </button>
+        </div>
+      </header>
+
+      <section class="options" aria-label="Opciones de renderizado">
+        <label class="toggle">
+          <input type="checkbox" data-option="fancy" />
+          <span class="toggle-box" aria-hidden="true"></span>
+          <span>Fancy</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" data-option="fullPath" />
+          <span class="toggle-box" aria-hidden="true"></span>
+          <span>Ruta completa</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" data-option="trailingSlash" />
+          <span class="toggle-box" aria-hidden="true"></span>
+          <span>Barra final /</span>
+        </label>
+
+        <label class="toggle">
+          <input type="checkbox" data-option="rootDot" />
+          <span class="toggle-box" aria-hidden="true"></span>
+          <span>Raíz .</span>
+        </label>
+
+        <span
+          id="save-status"
+          class="save-status"
+          role="status"
+          aria-live="polite"
+        ></span>
+      </section>
+
+      <main class="panes">
+        <section class="pane">
+          <header class="pane-head">
+            <span class="pane-title">Entrada</span>
+            <span class="pane-hint">tab · shift+tab · enter</span>
+          </header>
+          <textarea
+            id="source"
+            spellcheck="false"
+            autocapitalize="off"
+            autocomplete="off"
+            autocorrect="off"
+            wrap="off"
+            aria-label="Estructura de carpetas"
+          ></textarea>
+        </section>
+
+        <section class="pane">
+          <header class="pane-head">
+            <span class="pane-title">Árbol</span>
+            <span class="pane-hint" id="tree-meta"></span>
+          </header>
+          <pre id="tree" class="tree" aria-label="Diagrama generado"></pre>
+        </section>
+      </main>
+    </div>
+
+    <script src="js/parse-input.js"></script>
+    <script src="js/generate-tree.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/download-image.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
